@@ -1,0 +1,55 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
+from reportlab.lib.styles import getSampleStyleSheet
+
+# PDF file path
+file_path = "AL_Agricultural_Science_Model_Paper.pdf"
+
+# Document setup
+doc = SimpleDocTemplate(file_path, pagesize=A4)
+styles = getSampleStyleSheet()
+story = []
+
+# Title
+story.append(Paragraph("2025 උසස් පෙල කෘෂි විද්‍යාව — Model Paper", styles['Title']))
+story.append(Spacer(1, 12))
+
+# Paper I - MCQ Questions
+story.append(Paragraph("Paper I — MCQ (25)", styles['Heading2']))
+mcq_questions = [
+    "1. මැඩ pH අගය අඩු කිරීම සඳහා භාවිතා කරන්නේ කුමන ද්‍රව්‍යයද?",
+    "2. පොහොරවලින් N අංගය ලබා දෙන පොහොරයක් කුමක්ද?",
+    # ... (25 questions)
+]
+for q in mcq_questions:
+    story.append(Paragraph(q, styles['BodyText']))
+    story.append(Spacer(1, 6))
+
+story.append(PageBreak())
+
+# Paper II - Structured/Essay
+story.append(Paragraph("Paper II — Structured/Essay (25)", styles['Heading2']))
+structured_questions = [
+    "1. මැඩවල pH අගය පාලනය කිරීමේ වැදගත්කම විස්තර කරන්න.",
+    "2. මැඩවල සංස්කරණ ක්‍රම 3ක් සඳහන් කර ඒවා විස්තර කරන්න.",
+    # ... (25 questions)
+]
+for q in structured_questions:
+    story.append(Paragraph(q, styles['BodyText']))
+    story.append(Spacer(1, 6))
+
+story.append(PageBreak())
+
+# Answers Section
+story.append(Paragraph("පිළිතුරු (Answers)", styles['Heading2']))
+answers = [
+    "Paper I: 1. Lime (CaCO₃), 2. Urea, ...",
+    "Paper II: 1. Lime භාවිතයෙන් acid soil pH වැඩි කිරීම ...",
+    # ... full answers
+]
+for a in answers:
+    story.append(Paragraph(a, styles['BodyText']))
+    story.append(Spacer(1, 6))
+
+# Build PDF
+doc.build(story)
